@@ -20,9 +20,16 @@ while True:
     file = open("resources/results.json", 'r')
     json_data = json.load(file)
 
-    searched = s.recv(adr)
+    searched = clt.recv(1024)
+    # for test in json_data:
+    #     if test['Test Number'] == int(searched):
+    #         fullSend = "Test Number: " + str(test["Test Number"]) + "\nVideo Clip ID: " + str(test["Video Clip ID"] + "\nBandwidth Constraint: " + str(test["Bandwidth Constraint"]))
+    #         clt.send(bytes(fullSend, "utf-8"))
+
     for test in json_data:
-        if test['Test Number'] == searched:
-            for i in test:
-                print(i)
+        if test['Test Number'] == int(searched):
+            clt.send(bytes(str(test.items()), "utf-8"))
+
+            # for item in test['Test Number']:
+            #     item.keys()
 
